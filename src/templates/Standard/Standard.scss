@@ -1,0 +1,71 @@
+body {
+  background-color: #e3e3e3;
+  width: 21cm;
+  height: 29.7cm;
+}
+
+.template-standard {
+  .separator {
+    border-color: #b3b3b3;
+    width: 100%;
+  }
+  .section {
+    padding: 10px 15px 0 15px;
+
+    .section-container {
+      padding: 15px;
+      background-color: #f5f5f5;
+      border: 1px solid #b3b3b3;
+
+      .section-title {
+        font-size: 1.25rem;
+    
+        .title-icon {
+          margin-right: 0.75rem;
+        }
+      }
+    }
+  }
+
+  /* CV ITEM */
+  .item {
+    margin-bottom: 1rem;
+
+    .item-title {
+      margin-bottom: 0.5rem;
+      font-size: 1.35rem;
+      font-weight: 500;
+    }
+    .item-subtitle {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .item-time {
+      float: right;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 32px;
+      vertical-align: middle;
+    }
+    .item-description {
+      line-height: 1.25rem;
+      margin: 0.25rem 0;
+    }
+    .item-tasks {
+      line-height: 1.25rem;
+    }
+    .item-features span {
+      display: inline-block;
+      background-color: #4d4d4d;
+      padding: 0.45rem;
+      border-radius: 2px;
+      color: #f0f0f0;
+      margin: 0.25rem 0.25rem 0 0rem;
+      font-size: 0.7rem;
+    }
+    .item-features span.skill {
+      font-size: 1rem !important;
+    }
+  }
+}

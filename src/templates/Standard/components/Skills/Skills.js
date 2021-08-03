@@ -7,9 +7,11 @@ const Skills = ({skills}) => {
         return (
           <div className="section">
             <div className="section-container">
-              <h3 className="section-title">
-                <i className="fas fa-lightbulb title-icon"></i>Aptitudes principales
-              </h3>
+              <div className="section-header">
+                <h3 className="section-title">
+                  <i className="fas fa-lightbulb title-icon"></i>Aptitudes principales
+                </h3>
+              </div>
               <hr className="separator" />
               <div className="item">
                 <div className="item-features">

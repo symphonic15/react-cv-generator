@@ -4,9 +4,21 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat');
 
-html {
-  height: 100%;
+* {
+  box-sizing: border-box;
 }
+
 body {
   font-family: "Roboto", sans-serif;
+  width: fit-content;
+  margin: auto;
+  background-color: #252525;
+}
+.app-container {
+  padding: 1rem;
+  padding-top: 4rem;
+  
+  .document {
+    box-shadow: #555 0 0 10px 5px;
+  }
 }

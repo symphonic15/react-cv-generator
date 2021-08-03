@@ -18,10 +18,10 @@ const Standard = (props) => {
       <Header {...properties.header} />
       <Profile profileText={properties.sections.profile} />
       <Target targetText={properties.sections.target} />
-      <Experience experience={properties.sections.experience} />
-      <Portfolio portfolio={properties.sections.portfolio} />
+      <Experience experience={properties.sections.experiences} />
+      <Portfolio projects={properties.sections.projects} />
       <Skills skills={properties.sections.skills} />
-      <Education education={properties.sections.education} />
+      <Education studies={properties.sections.studies} />
       <Certificates certificates={properties.sections.certificates} />
       <Languages languages={properties.sections.languages} />
     </div>

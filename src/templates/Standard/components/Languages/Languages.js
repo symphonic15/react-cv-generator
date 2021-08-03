@@ -7,9 +7,11 @@ const Languages = ({languages}) => {
         return (
           <div className="section pb-3">
             <div className="section-container">
-              <h3 className="section-title">
-                <i className="fas fa-language title-icon"></i>Idiomas
-              </h3>
+              <div className="section-header">
+                <h3 className="section-title">
+                  <i className="fas fa-language title-icon"></i>Idiomas
+                </h3>
+              </div>
               <hr className="separator" />
               {languages.map((item, itemKey) => {
                 return (

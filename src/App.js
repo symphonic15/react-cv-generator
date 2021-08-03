@@ -1,136 +1,98 @@
+import React, { useRef } from 'react';
+import Modal from 'react-modal';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import 'reset-css';
-import './App.css';
+import './App.scss';
+
+// CV Templates
 import Standard from './templates/Standard/Standard';
 
+// Modals
+import Menu from './components/Menu';
+import HeaderModal from './components/Modals/HeaderModal';
+import ProfileModal from './components/Modals/ProfileModal';
+import TargetModal from './components/Modals/TargetModal';
+import ExperienceModal from './components/Modals/ExperienceModal';
+
+// Properties model
+import properties from './models/properties';
+import PortfolioModal from './components/Modals/PortfolioModal';
+import EducationModal from './components/Modals/EducationModal';
+import CertificatesModal from './components/Modals/CertificatesModal';
+import LanguagesModal from './components/Modals/LanguagesModal';
+import SkillsModal from './components/Modals/SkillsModal';
+
 const App = () => {
-  const properties = {
-    header: {
-      color: "#000",
-      name: "Andrés Sánchez",
-      specialty: "Técnico en Informática, desarrollador Front-end y colaborador activo en proyectos de código libre.",
-      contact: {
-        location: {
-          text: "Mar del Plata - Buenos Aires",
-          link: "https://goo.gl/maps/gPbh5civtvrC9c6r5",
-        },
-        email: {
-          text: "szandres50@gmail.com",
-          link: "mailto:szandres50@gmail.com",
-        },
-        phone: {
-          text: "+54 (223) 6869680",
-          link: "tel:+54 (223) 6869680",
-        },
-        linkedin: {
-          text: "linkedin.com/in/szandres",
-          link: "https://linkedin.com/in/szandres",
-        },
-        github: {
-          text: "github.com/symphonic15",
-          link: "https://github.com/symphonic15",
-        },
-        stackoverflow: {
-          text: "stackoverflow.com/u/11003545",
-          link: "https://stackoverflow.com/u/11003545",
-        }
-      },
-    },
-    sections: {
-      profile: "Esto es una breve descripción de mi",
-      target: "Estos son objetivos",
-      experience: [
-        {
-          title: "Desarrollador Angular/Ionic",
-          company: "Uxor IT",
-          summary: "Encargado de Front-end en sistema Magiis, SaaS destinado a compañías de transporte, conductores y pasajeros.",
-          tasks: "Diseño y rediseño de secciones. Análisis y desarrollo de nuevas funcionalidades. Corrección de bugs. Relevamiento de usuario. Soporte al cliente. Estimaciones. Testing unitario. Coaching.",
-          features: ["JAVA"],
-          time: "06/2020 - Presente",
-        },
-        {
-          title: "Desarrollador PHP",
-          company: "Uxor IT",
-          summary: "Desarrollo y mantenimiento Full-stack en sistema Brolify, canal de venta digital multiempresa para compañías de seguro.",
-          tasks: "Diseño y rediseño de secciones. Análisis y desarrollo de nuevas funcionalidades. Corrección de bugs. Estimaciones. Testing unitario. Coaching.",
-          features: [],
-          time: "09/2018 - 06/2020",
-        },
-        {
-          title: "Desarrollador web",
-          company: "Freelance",
-          summary: "Diseño y desarrollo de gestor de torneos y ligas web.",
-          tasks: "Análisis, diseño y desarrollo completo de sistema. Relevamiento de usuario. Testing unitario.",
-          features: [],
-          time: "08/2018 - 03/2019",
-        },
-        {
-          title: "Desarrollador Front-end",
-          company: "Freelance",
-          summary: "Diseño y desarrollo de template para aplicación industrial web.",
-          tasks: "Análisis, diseño y desarrollo de secciones. Testing unitario.",
-          features: [],
-          time: "08/2017 - 12/2017",
-        },
-      ],
-      education: [
-        {
-          title: "Técnico Universitario en Programación",
-          institute: "Universidad Tecnológica Nacional",
-          time: "03/2019 - 12/2020",
-        },
-        {
-          title: "Técnico en Informática",
-          institute: "Escuela de Educación Secundaria Técnica №5",
-          time: "03/2012 - 12/2018",
-        },
-      ],
-      portfolio: [
-        {
-          title: "Investment Tracker",
-          summary: "Aplicación personalizable diseñada para obtener toda la información general del estado de nuestras inversiones en el mercado, categorizandola y ofreciendo datos tales como las ganancias/pérdidas actuales e históricas, últimas operaciones de compra/venta y valor total invertido, entre otros.",
-          features: [],
-          link: "https://unjex.com/projects/investment-tracker",
-        },
-        {
-          title: "Magiis",
-          summary: "Plataforma digital destinada a compañías de transporte de personas para ofrecer a sus pasajeros una mejor experiencia de viaje, mediante servicios en la nube y aplicaciones móviles.",
-          features: [],
-          link: "https://magiis.com/",
-        },
-        {
-          title: "Brolify",
-          summary: "Canal de venta digital desarrollado para incrementar la cobertura comercial, brindando presencia directa y asesoría personalizada de manera automática.",
-          features: [],
-          link: "https://brokerdigital.brolify.com/",
-        },
-        {
-          title: "Mind Voice",
-          summary: "Aplicación gratuita desarrollada para ayudar a niños/as que se encuentran aprendiendo a leer y escribir y/o sufren problemas a la hora de comunicarse con el entorno. Todo esto mediante el uso de imágenes, texto, asistencias de voz y herramientas de accesibilidad.",
-          features: [],
-          link: "https://unjex.com/projects/mindvoice",
-        },
-      ],
-      certificates: [
-        {title: "Certificado 1", time: "12/2020", subtitle: "Subtitulo 1", institute: "Instituto"}
-      ],
-      skills: [
-        "Angular", "Ionic", "Electron", "JavaScript", "jQuery", "AJAX", "PHP", "CakePHP 3", "Slim", "Java", "JSF", "MySQL", "Firebase", "HTML", "CSS", "Bootstrap", "Materialize", "API REST", "Scrum", "Kanban", "Git", "TortoiseSVN", "Github", "Gitlab", "Bitbucket", "Jira", "Trello", "Elips"
-      ],
-      languages: [
-        {
-          language: "Español",
-          level: "Nativo"
-        },
-        {
-          language: "Ingles",
-          level: "Intermedio"
-        },
-      ]
-    },
-  };
+  const appContainer = useRef(null);
+  const pdfRef = useRef(null);
+  const [editingHeader, setEditingHeader] = React.useState(false);
+  const [editingProfile, setEditingProfile] = React.useState(false);
+  const [editingTarget, setEditingTarget] = React.useState(false);
+  const [editingExperience, setEditingExperience] = React.useState(false);
+  const [editingPortfolio, setEditingPortfolio] = React.useState(false);
+  const [editingSkills, setEditingSkills] = React.useState(false);
+  const [editingEducation, setEditingEducation] = React.useState(false);
+  const [editingCertificates, setEditingCertificates] = React.useState(false);
+  const [editingLanguages, setEditingLanguages] = React.useState(false);
+
+  const onMenuOptionClick = (option) => {
+    if(option === 'download') save();
+    else onEditSection(option);
+  }
+
+  const onEditSection = (section) => {
+    const editOptions = {
+      header: setEditingHeader,
+      profile: setEditingProfile,
+      target: setEditingTarget,
+      experience: setEditingExperience,
+      portfolio: setEditingPortfolio,
+      skills: setEditingSkills,
+      education: setEditingEducation,
+      certificates: setEditingCertificates,
+      languages: setEditingLanguages
+    }
+
+    editOptions[section](true);
+  }
+
+  const save = () => {
+    const input = pdfRef.current;
+    html2canvas(input, {
+        scrollX: -window.scrollX,
+        scrollY: -window.scrollY,
+        windowWidth: document.documentElement.offsetWidth,
+        windowHeight: document.documentElement.offsetHeight
+    })
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p','mm', [canvas.height * 0.26458, canvas.width * 0.26458]);
+        pdf.addImage(imgData, 'PNG', 0, 0);
+        pdf.save("CV.pdf");
+      });
+  }
+
+  Modal.setAppElement(appContainer.current);
 
   return (
-    <Standard properties={properties} />
+    <div className="app-container" ref={appContainer}>
+      <Menu onClickOption={onMenuOptionClick} />
+
+      <div className="document" ref={pdfRef}>
+        <Standard properties={properties} />
+      </div>
+
+      <HeaderModal properties={properties} show={editingHeader} onClose={() => setEditingHeader(false)} />
+      <ProfileModal properties={properties} show={editingProfile} onClose={() => setEditingProfile(false)} />
+      <TargetModal properties={properties} show={editingTarget} onClose={() => setEditingTarget(false)} />
+      <ExperienceModal properties={properties} show={editingExperience} onClose={() => setEditingExperience(false)} />
+      <SkillsModal properties={properties} show={editingSkills} onClose={() => setEditingSkills(false)} />
+      <PortfolioModal properties={properties} show={editingPortfolio} onClose={() => setEditingPortfolio(false)} />
+      <EducationModal properties={properties} show={editingEducation} onClose={() => setEditingEducation(false)} />
+      <CertificatesModal properties={properties} show={editingCertificates} onClose={() => setEditingCertificates(false)} />
+      <LanguagesModal properties={properties} show={editingLanguages} onClose={() => setEditingLanguages(false)} />
+    </div>
   );
 }
 

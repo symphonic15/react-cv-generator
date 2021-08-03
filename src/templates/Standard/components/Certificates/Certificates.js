@@ -7,17 +7,19 @@ const Certificates = ({certificates}) => {
         return (
           <div className="section">
             <div className="section-container">
-              <h3 className="section-title">
-                <i className="fas fa-certificate title-icon"></i>Certificados
-              </h3>
+              <div className="section-header">
+                <h3 className="section-title">
+                  <i className="fas fa-certificate title-icon"></i>Certificados
+                </h3>
+              </div>
               <hr className="separator" />
               {certificates.map((item, itemKey) => {
                 return (
                   <div key={itemKey} className="item">
                     <p className="item-title">
-                      {item.title}<span className="item-time">{item.time}</span>
+                      {item.title}<span className="item-time">{item.rangeTime}</span>
                     </p>
-                    <p className="item-subtitle">{item.institute}</p>
+                    <p className="item-subtitle">{item.institution}</p>
                   </div>
                 );
               })}

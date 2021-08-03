@@ -1,11 +1,12 @@
 .template-standard {
   .header {
+    position: relative;
     display: flex;
     background-image: url("../../assets/cv-header-background.png");
     background-size: cover;
     background-position: center;
     text-align: left;
-    padding: 30px 15px;
+    padding: 15px;
     color: #f0f0f0;
 
     .header-image {
@@ -33,13 +34,15 @@
     }
     .header-contact {
       margin-left: auto;
-      max-width: calc(40%);
+      max-width: 40%;
 
       li {
         margin-bottom: 0.25rem;
         
         i {
           margin-right: 0.25rem;
+          width: 20px;
+          text-align: center;
         }
       }
     }

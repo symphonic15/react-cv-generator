@@ -1,0 +1,50 @@
+.template-standard {
+  .header {
+    position: relative;
+    display: flex;
+    background-image: url("../../assets/cv-header-background.png");
+    background-size: cover;
+    background-position: center;
+    text-align: left;
+    padding: 15px;
+    color: #f0f0f0;
+
+    .header-image {
+      width: 100%;
+      max-width: 130px;
+      margin-right: 1.5rem;
+      text-align: left;
+
+      img {
+        width: 100%;
+      }
+    }
+    .header-info {
+      max-width: calc(60% - 130px);
+      padding-right: 0.5rem;
+
+      .header-info-name {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+      }
+      .header-info-title {
+        font-size: 1rem;
+        line-height: 1.25rem;
+      }
+    }
+    .header-contact {
+      margin-left: auto;
+      max-width: 40%;
+
+      li {
+        margin-bottom: 0.25rem;
+        
+        i {
+          margin-right: 0.25rem;
+          width: 20px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

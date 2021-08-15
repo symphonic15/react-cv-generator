@@ -80,27 +80,27 @@ const ExperienceModal = ({properties, show, onClose}) => {
     return (
       <div className="form-edit-group" key={index}>
         <div className="form-edit-item">
-          <label className="form-edit-label">Puesto</label>
+          <label className="form-edit-label">Job title - Puesto laboral</label>
           <input type="text" name="title" className="form-edit-input" value={titles[index]} onChange={(e) => setExperienceInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <label className="form-edit-label">Organización</label>
+          <label className="form-edit-label">Organization - Organización</label>
           <input type="text" name="company" className="form-edit-input" value={companies[index]} onChange={(e) => setExperienceInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <label className="form-edit-label">Período</label>
+          <label className="form-edit-label">Period - Período</label>
           <input type="text" name="rangeTime" className="form-edit-input" value={rangeTimes[index]} onChange={(e) => setExperienceInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <label className="form-edit-label">Descripción</label>
+          <label className="form-edit-label">Description - Descripción</label>
           <textarea type="text" name="description" className="form-edit-input form-edit-input-textarea" value={descriptions[index]} onChange={(e) => setExperienceInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <label className="form-edit-label">Tareas y/o herramientas</label>
-          <TagsInput name="features" className="form-edit-input form-edit-input-textarea" value={features[index]} onChange={(features) => setExperienceFeatures(features, index)} inputProps={{placeholder: "Escriba aquí"}} />
+          <label className="form-edit-label">Tasks and/or tools - Tareas y/o herramientas</label>
+          <TagsInput name="features" className="form-edit-input form-edit-input-textarea" value={features[index]} onChange={(features) => setExperienceFeatures(features, index)} inputProps={{placeholder: "Type here - Escriba aquí"}} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removeExperienceItem(e, index)}>Eliminar</button>
+          <button className="remove-btn" onClick={(e) => removeExperienceItem(e, index)}><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -114,7 +114,7 @@ const ExperienceModal = ({properties, show, onClose}) => {
     >
       <div className="modal-header">
         <div className="modal-title">
-          <h1>Experiencia</h1>
+          <h1>Experience - Experiencia</h1>
         </div>
         <div className="modal-close" onClick={() => closeModal()}>
           <i className="fas fa-times"></i>
@@ -124,12 +124,16 @@ const ExperienceModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(experiencesCount)].map((item, index) => ExperienceItem({index}))}
-          <button className="add-btn" onClick={(e) => addExperienceItem(e)}>Agregar experiencia</button>
+          <button className="add-btn" onClick={(e) => addExperienceItem(e)}><i class="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
-        <button className="action-btn cancel-btn" onClick={() => closeModal()}>Cancelar</button>
-        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>Guardar</button>
+        <button className="action-btn cancel-btn" onClick={() => closeModal()}>
+          <i class="fas fa-times"></i>
+        </button>
+        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
+          <i class="fas fa-check"></i>
+        </button>
       </div>
     </Modal>
   );

@@ -23,7 +23,7 @@ const ProfileModal = ({properties, show, onClose}) => {
     >
       <div className="modal-header">
         <div className="modal-title">
-          <h1>Perfil</h1>
+          <h1>Profile - Perfil</h1>
         </div>
         <div className="modal-close" onClick={() => closeModal()}>
           <i className="fas fa-times"></i>
@@ -38,8 +38,12 @@ const ProfileModal = ({properties, show, onClose}) => {
         </form>
       </div>
       <div className="modal-footer">
-        <button className="action-btn cancel-btn" onClick={() => closeModal()}>Cancelar</button>
-        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>Guardar</button>
+        <button className="action-btn cancel-btn" onClick={() => closeModal()}>
+          <i class="fas fa-times"></i>
+        </button>
+        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
+          <i class="fas fa-check"></i>
+        </button>
       </div>
     </Modal>
   );

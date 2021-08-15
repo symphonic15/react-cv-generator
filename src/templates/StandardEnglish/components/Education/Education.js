@@ -9,7 +9,7 @@ const Education = ({studies}) => {
             <div className="section-container">
               <div className="section-header">
                 <h3 className="section-title">
-                  <i className="fas fa-graduation-cap title-icon"></i>Estudios
+                  <i className="fas fa-graduation-cap title-icon"></i>Studies
                 </h3>
               </div>
               <hr className="separator" />

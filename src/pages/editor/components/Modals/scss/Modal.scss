@@ -82,6 +82,7 @@
             transition: 0.25s;
       
             i {
+              color: #fff;
               margin: auto;
               font-size: 3rem;
             }
@@ -103,7 +104,7 @@
           color: #fff;
           margin-bottom: 1rem;
           padding: 0 0.5rem;
-          font-family: "Roboto", sans-serif;
+          font-size: 1.5rem;
           cursor: pointer;
           transition: 0.2s;
 
@@ -125,7 +126,7 @@
           color: #fff;
           margin-bottom: 1rem;
           padding: 0 0.5rem;
-          font-family: "Roboto", sans-serif;
+          font-size: 1.5rem;
           cursor: pointer;
           transition: 0.2s;
 
@@ -168,7 +169,7 @@
             border-color: #555;
           }
           .react-tagsinput-input {
-            width: 150px;
+            width: 160px;
           }
         }
 
@@ -185,12 +186,13 @@
         }
       }
       .add-btn {
+        width: 100%;
         height: 35px;
         background: #008635;
         color: #fff;
         border: 1px solid #008635;
         padding: 0 0.5rem;
-        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
         cursor: pointer;
         transition: 0.2s;
 
@@ -204,12 +206,13 @@
         }
       }
       .remove-btn {
+        width: 100px;
         height: 35px;
         background: #9c0000;
         color: #fff;
         border: 1px solid #9c0000;
         padding: 0 0.5rem;
-        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
         cursor: pointer;
         transition: 0.2s;
 
@@ -237,11 +240,10 @@
       height: 45px;
       width: 50%;
       background: #252525;
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: #fff;
       border: unset;
       padding: 0 0.5rem;
-      font-family: "Roboto", sans-serif;
       cursor: pointer;
       transition: 0.2s;
 

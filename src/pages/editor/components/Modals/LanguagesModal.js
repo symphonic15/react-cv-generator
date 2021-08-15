@@ -55,15 +55,15 @@ const LanguagesModal = ({properties, show, onClose}) => {
     return (
       <div className="form-edit-group" key={index}>
         <div className="form-edit-item">
-          <label className="form-edit-label">Idioma</label>
+          <label className="form-edit-label">Language - Idioma</label>
           <input type="text" name="language" className="form-edit-input" value={languages[index]} onChange={(e) => setLanguageInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <label className="form-edit-label">Nivel</label>
+          <label className="form-edit-label">Level - Nivel</label>
           <input type="text" name="level" className="form-edit-input" value={levels[index]} onChange={(e) => setLanguageInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removeLanguageItem(e, index)}>Eliminar</button>
+          <button className="remove-btn" onClick={(e) => removeLanguageItem(e, index)}><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -77,7 +77,7 @@ const LanguagesModal = ({properties, show, onClose}) => {
     >
       <div className="modal-header">
         <div className="modal-title">
-          <h1>Idiomas</h1>
+          <h1>Languages - Idiomas</h1>
         </div>
         <div className="modal-close" onClick={() => closeModal()}>
           <i className="fas fa-times"></i>
@@ -87,12 +87,16 @@ const LanguagesModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(languagesCount)].map((item, index) => LanguageItem({index}))}
-          <button className="add-btn" onClick={(e) => addLanguageItem(e)}>Agregar idioma</button>
+          <button className="add-btn" onClick={(e) => addLanguageItem(e)}><i class="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
-        <button className="action-btn cancel-btn" onClick={() => closeModal()}>Cancelar</button>
-        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>Guardar</button>
+        <button className="action-btn cancel-btn" onClick={() => closeModal()}>
+          <i class="fas fa-times"></i>
+        </button>
+        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
+          <i class="fas fa-check"></i>
+        </button>
       </div>
     </Modal>
   );

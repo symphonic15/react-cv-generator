@@ -1,26 +1,27 @@
-import './Education.scss';
+import './Portfolio.scss';
 
-const Education = ({studies}) => {
+const Portfolio = ({projects}) => {
   return (
     (() => {
-      if(studies.length > 0) {
+      if(projects.length > 0) {
         return (
           <div className="section">
             <div className="section-container">
               <div className="section-header">
                 <h3 className="section-title">
-                  <i className="fas fa-graduation-cap title-icon"></i>Estudios
+                  <i className="fas fa-tasks title-icon"></i>Portfolio
                 </h3>
               </div>
               <hr className="separator" />
-              {studies.map((item, itemKey) => {
+              {projects.map((item, itemKey) => {
                 return (
                   <div key={itemKey} className="item">
                     <p className="item-title">
-                      {item.title}
-                      <span className="item-time">{item.rangeTime}</span>
+                      <span>{item.title}</span>
                     </p>
-                    <p className="item-subtitle">{item.institution}</p>
+                    <p className="item-description">
+                      {item.description}
+                    </p>
                   </div>
                 );
               })}
@@ -34,4 +35,4 @@ const Education = ({studies}) => {
   );
 }
 
-export default Education;
+export default Portfolio;

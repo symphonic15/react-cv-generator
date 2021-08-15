@@ -1,24 +1,23 @@
-import './Education.scss';
+import './Certificates.scss';
 
-const Education = ({studies}) => {
+const Certificates = ({certificates}) => {
   return (
     (() => {
-      if(studies.length > 0) {
+      if(certificates.length > 0) {
         return (
           <div className="section">
             <div className="section-container">
               <div className="section-header">
                 <h3 className="section-title">
-                  <i className="fas fa-graduation-cap title-icon"></i>Estudios
+                  <i className="fas fa-certificate title-icon"></i>Certificates
                 </h3>
               </div>
               <hr className="separator" />
-              {studies.map((item, itemKey) => {
+              {certificates.map((item, itemKey) => {
                 return (
                   <div key={itemKey} className="item">
                     <p className="item-title">
-                      {item.title}
-                      <span className="item-time">{item.rangeTime}</span>
+                      {item.title}<span className="item-time">{item.rangeTime}</span>
                     </p>
                     <p className="item-subtitle">{item.institution}</p>
                   </div>
@@ -34,4 +33,4 @@ const Education = ({studies}) => {
   );
 }
 
-export default Education;
+export default Certificates;

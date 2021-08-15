@@ -55,15 +55,15 @@ const PortfolioModal = ({properties, show, onClose}) => {
     return (
       <div className="form-edit-group" key={index}>
         <div className="form-edit-item">
-          <label className="form-edit-label">Título</label>
+          <label className="form-edit-label">Title - Título</label>
           <input type="text" name="title" className="form-edit-input" value={titles[index]} onChange={(e) => setPortfolioInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <label className="form-edit-label">Descripción</label>
+          <label className="form-edit-label">Description - Descripción</label>
           <textarea type="text" name="description" className="form-edit-input form-edit-input-textarea" value={descriptions[index]} onChange={(e) => setPortfolioInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removePortfolioItem(e, index)}>Eliminar</button>
+          <button className="remove-btn" onClick={(e) => removePortfolioItem(e, index)}><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -87,12 +87,16 @@ const PortfolioModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(projectsCount)].map((item, index) => PortfolioItem({index}))}
-          <button className="add-btn" onClick={(e) => addPortfolioItem(e)}>Agregar trabajo</button>
+          <button className="add-btn" onClick={(e) => addPortfolioItem(e)}><i class="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
-        <button className="action-btn cancel-btn" onClick={() => closeModal()}>Cancelar</button>
-        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>Guardar</button>
+        <button className="action-btn cancel-btn" onClick={() => closeModal()}>
+          <i class="fas fa-times"></i>
+        </button>
+        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
+          <i class="fas fa-check"></i>
+        </button>
       </div>
     </Modal>
   );

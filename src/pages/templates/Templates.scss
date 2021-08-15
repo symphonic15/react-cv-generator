@@ -1,0 +1,40 @@
+.templates-container {
+  .templates-header {
+    background: #e3e3e3;
+    padding: 1rem;
+    text-align: center;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+  .templates-options {
+    display: flex;
+    background: #e3e3e3;
+    width: fit-content;
+    max-width: 1024px;
+    margin: 1rem auto;
+    padding: 8px 0 0 8px;
+    flex-wrap: wrap;
+
+    .templates-option {
+      background: #fff;
+      width: 100%;
+      max-width: 330px;
+      margin: 0 8px 8px 0;
+      padding: 0.5rem;
+      border: 1px solid #b3b3b3;
+      text-align: center;
+      cursor: pointer;
+
+      .templates-option-title {
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+      }
+      .templates-option-image {
+        max-width: 100%;
+      }
+    }
+  }
+}

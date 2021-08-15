@@ -102,7 +102,7 @@ const HeaderModal = ({properties, show, onClose}) => {
     >
       <div className="modal-header">
         <div className="modal-title">
-          <h1>Encabezado</h1>
+          <h1>Header - Encabezado</h1>
         </div>
         <div className="modal-close" onClick={() => closeModal()}>
           <i className="fas fa-times"></i>
@@ -134,30 +134,34 @@ const HeaderModal = ({properties, show, onClose}) => {
                   onCropComplete={onCropComplete}
                 />
               </div>
-              <button className="form-edit-thumbnail-cancel" onClick={(e) => onThumbnailCanceled(e)}>Cancelar</button>
-              <button className="form-edit-thumbnail-confirm" onClick={(e) => onThumbnailConfirmed(e)}>Confirmar</button>
+              <button className="form-edit-thumbnail-cancel" onClick={(e) => onThumbnailCanceled(e)}>
+                <i class="fas fa-times"></i>
+              </button>
+              <button className="form-edit-thumbnail-confirm" onClick={(e) => onThumbnailConfirmed(e)}>
+                <i class="fas fa-check"></i>
+              </button>
             </div>
           </div>
           <hr className="separator" />
           <div className="form-edit-item">
-            <label className="form-edit-label">Nombre completo</label>
+            <label className="form-edit-label">Full name - Nombre completo</label>
             <input type="text" className="form-edit-input" value={fullname} onChange={(e) => {setFullname(e.target.value)}} />
           </div>
           <div className="form-edit-item">
-            <label className="form-edit-label">Título/especialidad</label>
+            <label className="form-edit-label">Professional title - Título/especialidad</label>
             <input type="text" className="form-edit-input" value={specialty} onChange={(e) => {setSpecialty(e.target.value)}} />
           </div>
           <hr className="separator" />
           <div className="form-edit-item">
-            <label className="form-edit-label">Localidad</label>
+            <label className="form-edit-label">Location - Localidad</label>
             <input type="text" name="location" className="form-edit-input" value={contactItems.location} onChange={(e) => {setContactItem(e)}} />
           </div>
           <div className="form-edit-item">
-            <label className="form-edit-label">Teléfono</label>
+            <label className="form-edit-label">Phone - Teléfono</label>
             <input type="text" name="phone" className="form-edit-input" value={contactItems.phone} onChange={(e) => {setContactItem(e)}} />
           </div>
           <div className="form-edit-item">
-            <label className="form-edit-label">Correo electrónico</label>
+            <label className="form-edit-label">Email</label>
             <input type="text" name="email" className="form-edit-input" value={contactItems.email} onChange={(e) => {setContactItem(e)}} />
           </div>
           <div className="form-edit-item">
@@ -175,8 +179,8 @@ const HeaderModal = ({properties, show, onClose}) => {
         </form>
       </div>
       <div className="modal-footer">
-        <button className="action-btn cancel-btn" onClick={() => closeModal()}>Cancelar</button>
-        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>Guardar</button>
+        <button className="action-btn cancel-btn" onClick={() => closeModal()}><i class="fas fa-times"></i></button>
+        <button className="action-btn accept-btn" onClick={() => confirmChanges()}><i class="fas fa-check"></i></button>
       </div>
     </Modal>
   );

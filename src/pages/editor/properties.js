@@ -1,9 +1,10 @@
-import defaultProfileImage from "../assets/img/default-profile.png";
+import defaultProfileImage from "../../assets/img/default-profile.png";
 
 const properties = {
   header: {
     color: "#000",
     thumbnail: defaultProfileImage,
+    showThumbnail: true,
     fullname: "Nombre Completo",
     specialty: "Puesto, rol y/o especialidad",
     contact: {

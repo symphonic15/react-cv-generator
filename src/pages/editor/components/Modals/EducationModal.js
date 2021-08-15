@@ -63,19 +63,19 @@ const EducationModal = ({properties, show, onClose}) => {
     return (
       <div className="form-edit-group" key={index}>
         <div className="form-edit-item">
-          <label className="form-edit-label">Título</label>
+          <label className="form-edit-label">Title - Título</label>
           <input type="text" name="title" className="form-edit-input" value={titles[index]} onChange={(e) => setEducationInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <label className="form-edit-label">Instituto</label>
+          <label className="form-edit-label">Institute - Instituto</label>
           <input type="text" name="institution" className="form-edit-input" value={institutions[index]} onChange={(e) => setEducationInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <label className="form-edit-label">Período</label>
+          <label className="form-edit-label">Period - Período</label>
           <input type="text" name="rangeTime" className="form-edit-input" value={rangeTimes[index]} onChange={(e) => setEducationInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removeEducationItem(e, index)}>Eliminar</button>
+          <button className="remove-btn" onClick={(e) => removeEducationItem(e, index)}><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -89,7 +89,7 @@ const EducationModal = ({properties, show, onClose}) => {
     >
       <div className="modal-header">
         <div className="modal-title">
-          <h1>Educación</h1>
+          <h1>Studies - Estudios</h1>
         </div>
         <div className="modal-close" onClick={() => closeModal()}>
           <i className="fas fa-times"></i>
@@ -99,12 +99,16 @@ const EducationModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(studiesCount)].map((item, index) => EducationItem({index}))}
-          <button className="add-btn" onClick={(e) => addEducationItem(e)}>Agregar estudio</button>
+          <button className="add-btn" onClick={(e) => addEducationItem(e)}><i class="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
-        <button className="action-btn cancel-btn" onClick={() => closeModal()}>Cancelar</button>
-        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>Guardar</button>
+        <button className="action-btn cancel-btn" onClick={() => closeModal()}>
+          <i class="fas fa-times"></i>
+        </button>
+        <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
+          <i class="fas fa-check"></i>
+        </button>
       </div>
     </Modal>
   );

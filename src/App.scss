@@ -9,16 +9,8 @@
 }
 
 body {
+  width: 100%;
   font-family: "Roboto", sans-serif;
-  width: fit-content;
   margin: auto;
   background-color: #252525;
-}
-.app-container {
-  padding: 1rem;
-  padding-top: 4rem;
-  
-  .document {
-    box-shadow: #555 0 0 10px 5px;
-  }
 }

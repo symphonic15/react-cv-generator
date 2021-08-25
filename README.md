@@ -3,6 +3,8 @@
 CV Generator with template selector and real-time preview.\
 Generador de Curriculum Vitae con selección de plantillas y vista previa en tiempo real.
 
+[LIVE DEMO](https://andez.dev/cv-generator/)
+
 ## Basic usage - Funcionamiento básico
 
 1. Select a template to enter the edit panel.

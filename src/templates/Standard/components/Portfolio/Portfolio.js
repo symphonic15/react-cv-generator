@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import './Portfolio.scss';
 
 const Portfolio = ({projects}) => {
@@ -35,4 +36,10 @@ const Portfolio = ({projects}) => {
   );
 }
 
-export default Portfolio;
+const mapStateToProps = state => {
+  return {
+    projects: state.sections.projects
+  }
+}
+
+export default connect(mapStateToProps, null)(Portfolio);

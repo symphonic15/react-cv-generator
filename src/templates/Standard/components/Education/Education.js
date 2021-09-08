@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import './Education.scss';
 
 const Education = ({studies}) => {
@@ -34,4 +35,10 @@ const Education = ({studies}) => {
   );
 }
 
-export default Education;
+const mapStateToProps = state => {
+  return {
+    studies: state.sections.studies
+  }
+}
+
+export default connect(mapStateToProps, null)(Education);

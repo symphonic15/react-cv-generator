@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { setLanguages } from '../../../../redux/actions';
 import './scss/Modal.scss';
 
-const LanguagesModal = ({properties, show, onClose}) => {
-  const [languagesCount, setLanguagesCount] = useState(properties.sections.languages.length);
-  const [languages, setLanguages] = useState(properties.sections.languages.map(item => item.language));
-  const [levels, setLevels] = useState(properties.sections.languages.map(item => item.level));
+const LanguagesModal = (props) => {
+  const {stateLanguages, show, onClose} = props;
+  const [languagesCount, setLanguagesCount] = useState(stateLanguages.length);
+  const [languages, setLanguages] = useState(stateLanguages.map(item => item.language));
+  const [levels, setLevels] = useState(stateLanguages.map(item => item.level));
 
   const confirmChanges = () => {
     let updatedLanguages = [];
@@ -15,14 +18,14 @@ const LanguagesModal = ({properties, show, onClose}) => {
         level: levels[i]
       });
     }
-    properties.sections.languages = updatedLanguages;
-    closeModal();
+    props.setLanguages(updatedLanguages);
+    onClose();
   }
 
   const closeModal = () => {
-    setLanguagesCount(properties.sections.languages.length);
-    setLanguages(properties.sections.languages.map(item => item.language));
-    setLevels(properties.sections.languages.map(item => item.level));
+    setLanguagesCount(stateLanguages.length);
+    setLanguages(stateLanguages.map(item => item.language));
+    setLevels(stateLanguages.map(item => item.level));
     onClose();
   }
 
@@ -63,7 +66,7 @@ const LanguagesModal = ({properties, show, onClose}) => {
           <input type="text" name="level" className="form-edit-input" value={levels[index]} onChange={(e) => setLanguageInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removeLanguageItem(e, index)}><i class="fas fa-trash-alt"></i></button>
+          <button className="remove-btn" onClick={(e) => removeLanguageItem(e, index)}><i className="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -87,19 +90,29 @@ const LanguagesModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(languagesCount)].map((item, index) => LanguageItem({index}))}
-          <button className="add-btn" onClick={(e) => addLanguageItem(e)}><i class="fas fa-plus"></i></button>
+          <button className="add-btn" onClick={(e) => addLanguageItem(e)}><i className="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
         <button className="action-btn cancel-btn" onClick={() => closeModal()}>
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
       </div>
     </Modal>
   );
 }
 
-export default LanguagesModal;
+const mapStateToProps = state => {
+  return {
+    stateLanguages: state.sections.languages
+  }
+}
+
+const mapDispatchToProps = {
+  setLanguages
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LanguagesModal);

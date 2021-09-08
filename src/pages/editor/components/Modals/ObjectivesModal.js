@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { setObjectives } from '../../../../redux/actions';
 import './scss/Modal.scss';
 
-const TargetModal = ({properties, show, onClose}) => {
-  const [target, setTarget] = useState(properties.sections.target);
+const ObjectivesModal = (props) => {
+  const {stateObjectives, show, onClose} = props;
+  const [objectives, setObjectives] = useState(stateObjectives);
   
   const confirmChanges = () => {
-    properties.sections.target = target;
-    closeModal();
+    props.setObjectives(objectives);
+    onClose();
   }
 
   const closeModal = () => {
-    setTarget(properties.sections.target);
+    setObjectives(stateObjectives);
     onClose();
   }
 
@@ -33,20 +36,30 @@ const TargetModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           <div className="form-edit-item">
-            <textarea type="text" className="form-edit-input form-edit-input-textarea" value={target} onChange={(e) => setTarget(e.target.value)} />
+            <textarea type="text" className="form-edit-input form-edit-input-textarea" value={objectives} onChange={(e) => setObjectives(e.target.value)} />
           </div>
         </form>
       </div>
       <div className="modal-footer">
         <button className="action-btn cancel-btn" onClick={() => closeModal()}>
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
       </div>
     </Modal>
   );
 }
 
-export default TargetModal;
+const mapStateToProps = state => {
+  return {
+    stateObjectives: state.sections.objectives
+  }
+}
+
+const mapDispatchToProps = {
+  setObjectives
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ObjectivesModal);

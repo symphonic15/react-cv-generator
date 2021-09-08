@@ -1,9 +1,10 @@
+import { connect } from 'react-redux';
 import './Profile.scss';
 
-const Profile = ({profileText}) => {
+const Profile = ({profile}) => {
   return (
     (() => {
-      if(profileText) {
+      if(profile) {
         return (
           <div className="section">
             <div className="section-container">
@@ -14,7 +15,7 @@ const Profile = ({profileText}) => {
               </div>
               <hr className="separator" />
               <p className="m-0">
-                { profileText }
+                { profile }
               </p>
             </div>
           </div>
@@ -26,4 +27,10 @@ const Profile = ({profileText}) => {
   );
 }
 
-export default Profile;
+const mapStateToProps = state => {
+  return {
+    profile: state.sections.profile
+  }
+}
+
+export default connect(mapStateToProps, null)(Profile);

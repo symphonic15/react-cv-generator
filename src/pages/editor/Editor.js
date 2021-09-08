@@ -8,7 +8,7 @@ import './Editor.scss';
 import Menu from './components/Menu/Menu';
 import HeaderModal from './components/Modals/HeaderModal';
 import ProfileModal from './components/Modals/ProfileModal';
-import TargetModal from './components/Modals/TargetModal';
+import ObjectivesModal from './components/Modals/ObjectivesModal';
 import ExperienceModal from './components/Modals/ExperienceModal';
 import PortfolioModal from './components/Modals/PortfolioModal';
 import EducationModal from './components/Modals/EducationModal';
@@ -20,15 +20,12 @@ import SkillsModal from './components/Modals/SkillsModal';
 import Standard from '../../templates/Standard/Standard';
 import StandardEnglish from '../../templates/StandardEnglish/StandardEnglish';
 
-// General CV Properties
-import properties from './properties';
-
 const Editor = ({selectedTemplate}) => {
   const appContainer = useRef(null);
   const pdfRef = useRef(null);
   const [editingHeader, setEditingHeader] = React.useState(false);
   const [editingProfile, setEditingProfile] = React.useState(false);
-  const [editingTarget, setEditingTarget] = React.useState(false);
+  const [editingObjectives, setEditingObjectives] = React.useState(false);
   const [editingExperience, setEditingExperience] = React.useState(false);
   const [editingPortfolio, setEditingPortfolio] = React.useState(false);
   const [editingSkills, setEditingSkills] = React.useState(false);
@@ -39,9 +36,9 @@ const Editor = ({selectedTemplate}) => {
   const Template = () => {
     switch(selectedTemplate) {
       case 'Standard':
-        return <Standard properties={properties} />;
+        return <Standard />;
       case 'StandardEnglish':
-        return <StandardEnglish properties={properties} />;
+        return <StandardEnglish />;
       default:
         return;
     }
@@ -56,7 +53,7 @@ const Editor = ({selectedTemplate}) => {
     const editOptions = {
       header: setEditingHeader,
       profile: setEditingProfile,
-      target: setEditingTarget,
+      objectives: setEditingObjectives,
       experience: setEditingExperience,
       portfolio: setEditingPortfolio,
       skills: setEditingSkills,
@@ -90,17 +87,17 @@ const Editor = ({selectedTemplate}) => {
     <div className="editor-container" ref={appContainer}>
       <Menu onClickOption={onMenuOptionClick} />
       <div className="document" ref={pdfRef}>
-        <Template properties={properties} />
+        <Template />
       </div>
-      <HeaderModal properties={properties} show={editingHeader} onClose={() => setEditingHeader(false)} />
-      <ProfileModal properties={properties} show={editingProfile} onClose={() => setEditingProfile(false)} />
-      <TargetModal properties={properties} show={editingTarget} onClose={() => setEditingTarget(false)} />
-      <ExperienceModal properties={properties} show={editingExperience} onClose={() => setEditingExperience(false)} />
-      <SkillsModal properties={properties} show={editingSkills} onClose={() => setEditingSkills(false)} />
-      <PortfolioModal properties={properties} show={editingPortfolio} onClose={() => setEditingPortfolio(false)} />
-      <EducationModal properties={properties} show={editingEducation} onClose={() => setEditingEducation(false)} />
-      <CertificatesModal properties={properties} show={editingCertificates} onClose={() => setEditingCertificates(false)} />
-      <LanguagesModal properties={properties} show={editingLanguages} onClose={() => setEditingLanguages(false)} />
+      <HeaderModal show={editingHeader} onClose={() => setEditingHeader(false)} />
+      <ProfileModal show={editingProfile} onClose={() => setEditingProfile(false)} />
+      <ObjectivesModal show={editingObjectives} onClose={() => setEditingObjectives(false)} />
+      <ExperienceModal show={editingExperience} onClose={() => setEditingExperience(false)} />
+      <PortfolioModal show={editingPortfolio} onClose={() => setEditingPortfolio(false)} />
+      <SkillsModal show={editingSkills} onClose={() => setEditingSkills(false)} />
+      <EducationModal show={editingEducation} onClose={() => setEditingEducation(false)} />
+      <CertificatesModal show={editingCertificates} onClose={() => setEditingCertificates(false)} />
+      <LanguagesModal show={editingLanguages} onClose={() => setEditingLanguages(false)} />
     </div>
   );
 }

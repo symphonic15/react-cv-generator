@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { setCertificates } from '../../../../redux/actions';
 import './scss/Modal.scss';
 
-const CertificatesModal = ({properties, show, onClose}) => {
-  const [certificatesCount, setCertificatesCount] = useState(properties.sections.certificates.length);
-  const [titles, setTitles] = useState(properties.sections.certificates.map(item => item.title));
-  const [institutions, setInstitutions] = useState(properties.sections.certificates.map(item => item.institution));
-  const [rangeTimes, setRangeTimes] = useState(properties.sections.certificates.map(item => item.rangeTime));
+const CertificatesModal = (props) => {
+  const {stateCertificates, show, onClose} = props;
+  const [certificatesCount, setCertificatesCount] = useState(stateCertificates.length);
+  const [titles, setTitles] = useState(stateCertificates.map(item => item.title));
+  const [institutions, setInstitutions] = useState(stateCertificates.map(item => item.institution));
+  const [rangeTimes, setRangeTimes] = useState(stateCertificates.map(item => item.rangeTime));
 
   const confirmChanges = () => {
     let updatedCertificates = [];
@@ -17,15 +20,15 @@ const CertificatesModal = ({properties, show, onClose}) => {
         rangeTime: rangeTimes[i]
       });
     }
-    properties.sections.certificates = updatedCertificates;
-    closeModal();
+    props.setCertificates(updatedCertificates);
+    onClose();
   }
 
   const closeModal = () => {
-    setCertificatesCount(properties.sections.certificates.length);
-    setTitles(properties.sections.certificates.map(item => item.title));
-    setInstitutions(properties.sections.certificates.map(item => item.institution));
-    setRangeTimes(properties.sections.certificates.map(item => item.rangeTime));
+    setCertificatesCount(stateCertificates.length);
+    setTitles(stateCertificates.map(item => item.title));
+    setInstitutions(stateCertificates.map(item => item.institution));
+    setRangeTimes(stateCertificates.map(item => item.rangeTime));
     onClose();
   }
 
@@ -75,7 +78,7 @@ const CertificatesModal = ({properties, show, onClose}) => {
           <input type="text" name="rangeTime" className="form-edit-input" value={rangeTimes[index]} onChange={(e) => setCertificateInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removeCertificatesItem(e, index)}><i class="fas fa-trash-alt"></i></button>
+          <button className="remove-btn" onClick={(e) => removeCertificatesItem(e, index)}><i className="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -99,19 +102,29 @@ const CertificatesModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(certificatesCount)].map((item, index) => CertificateItem({index}))}
-          <button className="add-btn" onClick={(e) => addCertificateItem(e)}><i class="fas fa-plus"></i></button>
+          <button className="add-btn" onClick={(e) => addCertificateItem(e)}><i className="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
         <button className="action-btn cancel-btn" onClick={() => closeModal()}>
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
       </div>
     </Modal>
   );
 }
 
-export default CertificatesModal;
+const mapStateToProps = state => {
+  return {
+    stateCertificates: state.sections.certificates
+  }
+}
+
+const mapToDispatchProps = {
+  setCertificates
+}
+
+export default connect(mapStateToProps, mapToDispatchProps)(CertificatesModal);

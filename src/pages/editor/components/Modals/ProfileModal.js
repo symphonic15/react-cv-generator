@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { setProfile } from '../../../../redux/actions';
 import './scss/Modal.scss';
 
-const ProfileModal = ({properties, show, onClose}) => {
-  const [profile, setProfile] = useState(properties.sections.profile);
+const ProfileModal = (props) => {
+  const { stateProfile, show, onClose } = props;
+  const [profile, setProfile] = useState(stateProfile);
   
   const confirmChanges = () => {
-    properties.sections.profile = profile;
-    closeModal();
+    props.setProfile(profile);
+    onClose();
   }
 
   const closeModal = () => {
-    setProfile(properties.sections.profile);
+    setProfile(stateProfile);
     onClose();
   }
 
@@ -39,14 +42,24 @@ const ProfileModal = ({properties, show, onClose}) => {
       </div>
       <div className="modal-footer">
         <button className="action-btn cancel-btn" onClick={() => closeModal()}>
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
       </div>
     </Modal>
   );
 }
 
-export default ProfileModal;
+const mapStateToProps = state => {
+  return {
+    stateProfile: state.sections.profile
+  }
+}
+
+const mapDispatchToProps = {
+  setProfile
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileModal);

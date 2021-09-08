@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import './Skills.scss';
 
 const Skills = ({skills}) => {
@@ -32,4 +33,10 @@ const Skills = ({skills}) => {
   );
 }
 
-export default Skills;
+const mapStateToProps = state => {
+  return {
+    skills: state.sections.skills
+  }
+}
+
+export default connect(mapStateToProps, null)(Skills);

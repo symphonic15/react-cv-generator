@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { setStudies } from '../../../../redux/actions';
 import './scss/Modal.scss';
 
-const EducationModal = ({properties, show, onClose}) => {
-  const [studiesCount, setStudiesCount] = useState(properties.sections.studies.length);
-  const [titles, setTitles] = useState(properties.sections.studies.map(item => item.title));
-  const [institutions, setInstitutions] = useState(properties.sections.studies.map(item => item.institution));
-  const [rangeTimes, setRangeTimes] = useState(properties.sections.studies.map(item => item.rangeTime));
+const EducationModal = (props) => {
+  const {stateStudies, show, onClose} = props;
+  const [studiesCount, setStudiesCount] = useState(stateStudies.length);
+  const [titles, setTitles] = useState(stateStudies.map(item => item.title));
+  const [institutions, setInstitutions] = useState(stateStudies.map(item => item.institution));
+  const [rangeTimes, setRangeTimes] = useState(stateStudies.map(item => item.rangeTime));
 
   const confirmChanges = () => {
     let updatedStudies = [];
@@ -17,15 +20,15 @@ const EducationModal = ({properties, show, onClose}) => {
         rangeTime: rangeTimes[i]
       });
     }
-    properties.sections.studies = updatedStudies;
-    closeModal();
+    props.setStudies(updatedStudies);
+    onClose();
   }
 
   const closeModal = () => {
-    setStudiesCount(properties.sections.studies.length);
-    setTitles(properties.sections.studies.map(item => item.title));
-    setInstitutions(properties.sections.studies.map(item => item.institution));
-    setRangeTimes(properties.sections.studies.map(item => item.rangeTime));
+    setStudiesCount(stateStudies.length);
+    setTitles(stateStudies.map(item => item.title));
+    setInstitutions(stateStudies.map(item => item.institution));
+    setRangeTimes(stateStudies.map(item => item.rangeTime));
     onClose();
   }
 
@@ -75,7 +78,7 @@ const EducationModal = ({properties, show, onClose}) => {
           <input type="text" name="rangeTime" className="form-edit-input" value={rangeTimes[index]} onChange={(e) => setEducationInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removeEducationItem(e, index)}><i class="fas fa-trash-alt"></i></button>
+          <button className="remove-btn" onClick={(e) => removeEducationItem(e, index)}><i className="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -99,19 +102,29 @@ const EducationModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(studiesCount)].map((item, index) => EducationItem({index}))}
-          <button className="add-btn" onClick={(e) => addEducationItem(e)}><i class="fas fa-plus"></i></button>
+          <button className="add-btn" onClick={(e) => addEducationItem(e)}><i className="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
         <button className="action-btn cancel-btn" onClick={() => closeModal()}>
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
       </div>
     </Modal>
   );
 }
 
-export default EducationModal;
+const mapStateToProps = state => {
+  return {
+    stateStudies: state.sections.studies
+  }
+}
+
+const mapToDispatchProps = {
+  setStudies
+}
+
+export default connect(mapStateToProps, mapToDispatchProps)(EducationModal);

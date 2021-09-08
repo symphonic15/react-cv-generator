@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import './Languages.scss';
 
 const Languages = ({languages}) => {
@@ -31,4 +32,10 @@ const Languages = ({languages}) => {
   );
 }
 
-export default Languages;
+const mapStateToProps = state => {
+  return {
+    languages: state.sections.languages
+  }
+}
+
+export default connect(mapStateToProps, null)(Languages);

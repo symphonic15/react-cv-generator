@@ -1,20 +1,21 @@
-import './Target.scss';
+import { connect } from 'react-redux';
+import './Objectives.scss';
 
-const Target = ({targetText}) => {
+const Objectives = ({objectives}) => {
   return (
     (() => {
-      if(targetText) {
+      if(objectives) {
         return (
           <div className="section">
             <div className="section-container">
               <div className="section-header">
                 <h3 className="section-title">
-                  <i className="fas fa-location-arrow title-icon"></i>Objetivos
+                  <i className="fas fa-location-arrow title-icon"></i>Objectives
                 </h3>
               </div>
               <hr className="separator" />
               <p className="m-0">
-                { targetText }
+                { objectives }
               </p>
             </div>
           </div>
@@ -26,4 +27,10 @@ const Target = ({targetText}) => {
   );
 }
 
-export default Target;
+const mapStateToProps = state => {
+  return {
+    objectives: state.sections.objectives
+  }
+}
+
+export default connect(mapStateToProps, null)(Objectives);

@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import './Certificates.scss';
 
 const Certificates = ({certificates}) => {
@@ -33,4 +34,10 @@ const Certificates = ({certificates}) => {
   );
 }
 
-export default Certificates;
+const mapStateToProps = state => {
+  return {
+    certificates: state.sections.certificates
+  }
+}
+
+export default connect(mapStateToProps, null)(Certificates);

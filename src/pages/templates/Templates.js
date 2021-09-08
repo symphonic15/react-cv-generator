@@ -9,6 +9,7 @@ const Templates = ({onTemplateSelect}) => {
     <div className="templates-container">
       <div className="templates-header">
         <h1>CV Generator</h1>
+        <p>Seleccione una plantilla</p>
       </div>
       <div className="templates-options">
         <div className="templates-option" onClick={() => onTemplateSelect('Standard')}>

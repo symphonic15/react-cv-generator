@@ -1,13 +1,16 @@
 import { useState, useRef } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import Cropper from 'react-easy-crop';
+import { setHeader } from '../../../../redux/actions';
 import './scss/Modal.scss';
 
-const HeaderModal = ({properties, show, onClose}) => {
-  const [thumbnail, setThumbnail] = useState(properties.header.thumbnail);
-  const [fullname, setFullname] = useState(properties.header.fullname);
-  const [specialty, setSpecialty] = useState(properties.header.specialty);
-  const [contactItems, setContactItems] = useState(properties.header.contact);
+const HeaderModal = (props) => {
+  const { stateHeader, show, onClose } = props;
+  const [thumbnail, setThumbnail] = useState(stateHeader.thumbnail);
+  const [fullname, setFullname] = useState(stateHeader.fullname);
+  const [specialty, setSpecialty] = useState(stateHeader.specialty);
+  const [contactItems, setContactItems] = useState(stateHeader.contact);
 
   // Thumbnail data
   const canvasRef = useRef(null);
@@ -80,17 +83,20 @@ const HeaderModal = ({properties, show, onClose}) => {
   }
   
   const confirmChanges = () => {
-    properties.header.thumbnail = thumbnail;
-    properties.header.fullname = fullname;
-    properties.header.specialty = specialty;
-    properties.header.contact = contactItems;
-    closeModal();
+    props.setHeader({
+      ...stateHeader,
+      thumbnail: thumbnail,
+      fullname: fullname,
+      specialty: specialty,
+      contact: contactItems
+    })
+    onClose();
   }
 
   const closeModal = () => {
-    setFullname(properties.header.fullname);
-    setSpecialty(properties.header.specialty);
-    setContactItems(properties.header.contact);
+    setFullname(stateHeader.fullname);
+    setSpecialty(stateHeader.specialty);
+    setContactItems(stateHeader.contact);
     onClose();
   }
 
@@ -135,10 +141,10 @@ const HeaderModal = ({properties, show, onClose}) => {
                 />
               </div>
               <button className="form-edit-thumbnail-cancel" onClick={(e) => onThumbnailCanceled(e)}>
-                <i class="fas fa-times"></i>
+                <i className="fas fa-times"></i>
               </button>
               <button className="form-edit-thumbnail-confirm" onClick={(e) => onThumbnailConfirmed(e)}>
-                <i class="fas fa-check"></i>
+                <i className="fas fa-check"></i>
               </button>
             </div>
           </div>
@@ -179,11 +185,21 @@ const HeaderModal = ({properties, show, onClose}) => {
         </form>
       </div>
       <div className="modal-footer">
-        <button className="action-btn cancel-btn" onClick={() => closeModal()}><i class="fas fa-times"></i></button>
-        <button className="action-btn accept-btn" onClick={() => confirmChanges()}><i class="fas fa-check"></i></button>
+        <button className="action-btn cancel-btn" onClick={() => closeModal()}><i className="fas fa-times"></i></button>
+        <button className="action-btn accept-btn" onClick={() => confirmChanges()}><i className="fas fa-check"></i></button>
       </div>
     </Modal>
   );
 }
 
-export default HeaderModal;
+const mapStateToProps = state => {
+  return {
+    stateHeader: state.header
+  }
+}
+
+const mapDispatchToProps = {
+  setHeader
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderModal);

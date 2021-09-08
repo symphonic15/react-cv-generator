@@ -1,16 +1,19 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import TagsInput from 'react-tagsinput';
+import { setExperiences } from '../../../../redux/actions';
 import 'react-tagsinput/react-tagsinput.css';
 import './scss/Modal.scss';
 
-const ExperienceModal = ({properties, show, onClose}) => {
-  const [experiencesCount, setExperiencesCount] = useState(properties.sections.experiences.length);
-  const [titles, setTitles] = useState(properties.sections.experiences.map(item => item.title));
-  const [companies, setCompanies] = useState(properties.sections.experiences.map(item => item.company));
-  const [rangeTimes, setRangeTimes] = useState(properties.sections.experiences.map(item => item.rangeTime));
-  const [descriptions, setDescriptions] = useState(properties.sections.experiences.map(item => item.description));
-  const [features, setFeatures] = useState(properties.sections.experiences.map(item => item.features));
+const ExperienceModal = (props) => {
+  const {stateExperiences, show, onClose} =  props;
+  const [experiencesCount, setExperiencesCount] = useState(stateExperiences.length);
+  const [titles, setTitles] = useState(stateExperiences.map(item => item.title));
+  const [companies, setCompanies] = useState(stateExperiences.map(item => item.company));
+  const [rangeTimes, setRangeTimes] = useState(stateExperiences.map(item => item.rangeTime));
+  const [descriptions, setDescriptions] = useState(stateExperiences.map(item => item.description));
+  const [features, setFeatures] = useState(stateExperiences.map(item => item.features));
 
   const confirmChanges = () => {
     let updatedExperience = [];
@@ -23,17 +26,18 @@ const ExperienceModal = ({properties, show, onClose}) => {
         features: features[i]
       });
     }
-    properties.sections.experiences = updatedExperience;
-    closeModal();
+    
+    props.setExperiences(updatedExperience);
+    onClose();
   }
 
   const closeModal = () => {
-    setExperiencesCount(properties.sections.experiences.length);
-    setTitles(properties.sections.experiences.map(item => item.title));
-    setCompanies(properties.sections.experiences.map(item => item.company));
-    setRangeTimes(properties.sections.experiences.map(item => item.rangeTime));
-    setDescriptions(properties.sections.experiences.map(item => item.description));
-    setFeatures(properties.sections.experiences.map(item => item.features));
+    setExperiencesCount(stateExperiences.length);
+    setTitles(stateExperiences.map(item => item.title));
+    setCompanies(stateExperiences.map(item => item.company));
+    setRangeTimes(stateExperiences.map(item => item.rangeTime));
+    setDescriptions(stateExperiences.map(item => item.description));
+    setFeatures(stateExperiences.map(item => item.features));
     onClose();
   }
 
@@ -100,7 +104,7 @@ const ExperienceModal = ({properties, show, onClose}) => {
           <TagsInput name="features" className="form-edit-input form-edit-input-textarea" value={features[index]} onChange={(features) => setExperienceFeatures(features, index)} inputProps={{placeholder: "Type here - Escriba aquí"}} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removeExperienceItem(e, index)}><i class="fas fa-trash-alt"></i></button>
+          <button className="remove-btn" onClick={(e) => removeExperienceItem(e, index)}><i className="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -124,19 +128,29 @@ const ExperienceModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(experiencesCount)].map((item, index) => ExperienceItem({index}))}
-          <button className="add-btn" onClick={(e) => addExperienceItem(e)}><i class="fas fa-plus"></i></button>
+          <button className="add-btn" onClick={(e) => addExperienceItem(e)}><i className="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
         <button className="action-btn cancel-btn" onClick={() => closeModal()}>
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
       </div>
     </Modal>
   );
 }
 
-export default ExperienceModal;
+const mapStateToProps = state => {
+  return {
+    stateExperiences: state.sections.experiences
+  }
+}
+
+const mapDispatchToProps = {
+  setExperiences
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExperienceModal);

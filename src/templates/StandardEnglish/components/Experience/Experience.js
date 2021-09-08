@@ -1,9 +1,10 @@
+import { connect } from 'react-redux';
 import './Experience.scss';
 
-const Experience = ({experience}) => {
+const Experience = ({experiences}) => {
   return (
     (() => {
-      if(experience.length > 0) {
+      if(experiences.length > 0) {
         return (
           <div className="section">
             <div className="section-container">
@@ -13,7 +14,7 @@ const Experience = ({experience}) => {
                 </h3>
               </div>
               <hr className="separator" />
-              {experience.map((item, itemKey) => {
+              {experiences.map((item, itemKey) => {
                 return (
                   <div key={itemKey} className="item">
                     <p className="item-title">
@@ -41,4 +42,10 @@ const Experience = ({experience}) => {
   );
 }
 
-export default Experience;
+const mapStateToProps = state => {
+  return {
+    experiences: state.sections.experiences
+  }
+}
+
+export default connect(mapStateToProps, null)(Experience);

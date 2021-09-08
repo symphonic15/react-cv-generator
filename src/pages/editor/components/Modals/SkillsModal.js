@@ -1,19 +1,22 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import TagsInput from 'react-tagsinput';
+import { setSkills } from '../../../../redux/actions';
 import 'react-tagsinput/react-tagsinput.css';
 import './scss/Modal.scss';
 
-const SkillsModal = ({properties, show, onClose}) => {
-  const [skills, setSkills] = useState(properties.sections.skills);
+const SkillsModal = (props) => {
+  const {stateSkills, show, onClose} = props;
+  const [skills, setSkills] = useState(stateSkills);
   
   const confirmChanges = () => {
-    properties.sections.skills = skills;
-    closeModal();
+    props.setSkills(skills);
+    onClose();
   }
 
   const closeModal = () => {
-    setSkills(properties.sections.skills);
+    setSkills(stateSkills);
     onClose();
   }
 
@@ -45,14 +48,24 @@ const SkillsModal = ({properties, show, onClose}) => {
       </div>
       <div className="modal-footer">
         <button className="action-btn cancel-btn" onClick={() => closeModal()}>
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
       </div>
     </Modal>
   );
 }
 
-export default SkillsModal;
+const mapStateToProps = state => {
+  return {
+    stateSkills: state.sections.skills
+  }
+}
+
+const mapDispatchToProps = {
+  setSkills
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SkillsModal);

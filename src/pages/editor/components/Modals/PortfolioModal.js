@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { setProjects } from '../../../../redux/actions';
 import './scss/Modal.scss';
 
-const PortfolioModal = ({properties, show, onClose}) => {
-  const [projectsCount, setProjectsCount] = useState(properties.sections.projects.length);
-  const [titles, setTitles] = useState(properties.sections.projects.map(item => item.title));
-  const [descriptions, setDescriptions] = useState(properties.sections.projects.map(item => item.description));
+const PortfolioModal = (props) => {
+  const {stateProjects, show, onClose} = props;
+  const [projectsCount, setProjectsCount] = useState(stateProjects.length);
+  const [titles, setTitles] = useState(stateProjects.map(item => item.title));
+  const [descriptions, setDescriptions] = useState(stateProjects.map(item => item.description));
 
   const confirmChanges = () => {
     let updatedProjects = [];
@@ -15,14 +18,14 @@ const PortfolioModal = ({properties, show, onClose}) => {
         description: descriptions[i]
       });
     }
-    properties.sections.projects = updatedProjects;
-    closeModal();
+    props.setProjects(updatedProjects);
+    onClose();
   }
 
   const closeModal = () => {
-    setProjectsCount(properties.sections.projects.length);
-    setTitles(properties.sections.projects.map(item => item.title));
-    setDescriptions(properties.sections.projects.map(item => item.description));
+    setProjectsCount(stateProjects.length);
+    setTitles(stateProjects.map(item => item.title));
+    setDescriptions(stateProjects.map(item => item.description));
     onClose();
   }
 
@@ -63,7 +66,7 @@ const PortfolioModal = ({properties, show, onClose}) => {
           <textarea type="text" name="description" className="form-edit-input form-edit-input-textarea" value={descriptions[index]} onChange={(e) => setPortfolioInput(e, index)} />
         </div>
         <div className="form-edit-item">
-          <button className="remove-btn" onClick={(e) => removePortfolioItem(e, index)}><i class="fas fa-trash-alt"></i></button>
+          <button className="remove-btn" onClick={(e) => removePortfolioItem(e, index)}><i className="fas fa-trash-alt"></i></button>
         </div>
       </div>
     );
@@ -87,19 +90,29 @@ const PortfolioModal = ({properties, show, onClose}) => {
       <div className="modal-body">
         <form className="form-edit">
           {[...Array(projectsCount)].map((item, index) => PortfolioItem({index}))}
-          <button className="add-btn" onClick={(e) => addPortfolioItem(e)}><i class="fas fa-plus"></i></button>
+          <button className="add-btn" onClick={(e) => addPortfolioItem(e)}><i className="fas fa-plus"></i></button>
         </form>
       </div>
       <div className="modal-footer">
         <button className="action-btn cancel-btn" onClick={() => closeModal()}>
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
         <button className="action-btn accept-btn" onClick={() => confirmChanges()}>
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
       </div>
     </Modal>
   );
 }
 
-export default PortfolioModal;
+const mapStateToProps = state => {
+  return {
+    stateProjects: state.sections.projects
+  }
+}
+
+const mapDispatchToProps = {
+  setProjects
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioModal);

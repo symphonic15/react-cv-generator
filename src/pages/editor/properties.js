@@ -18,7 +18,7 @@ const properties = {
   },
   sections: {
     profile: "Una breve descripción acerca de mí",
-    target: "Objetivos profesionales que espero poder cumplir.",
+    objectives: "Objetivos profesionales que espero poder cumplir.",
     experiences: [
       {
         title: "Puesto/rol",

@@ -1,45 +1,46 @@
+import { connect } from 'react-redux';
 import './Header.scss';
 
-const Header = (props) => {
+const Header = ({header}) => {
   return (
-    <div className="header" style={{ backgroundColor: props.color }}>
+    <div className="header" style={{ backgroundColor: header.color }}>
       <div className="header-image">
-        <img src={props.thumbnail} alt="" />
+        <img src={header.thumbnail} alt="" />
       </div>
       <div className="header-info">
-        <p className="header-info-name">{ props.fullname }</p>
-        <p className="header-info-title">{ props.specialty }</p>
+        <p className="header-info-name">{ header.fullname }</p>
+        <p className="header-info-title">{ header.specialty }</p>
       </div>
       <div className="header-contact">
         <ul>
           <li>
             <span>
-              <i className="fas fa-map-marker-alt"></i> { props.contact.location }
+              <i className="fas fa-map-marker-alt"></i> { header.contact.location }
             </span>
           </li>
           <li>
             <span>
-              <i className="fas fa-phone"></i> { props.contact.phone }
+              <i className="fas fa-phone"></i> { header.contact.phone }
             </span>
           </li>
           <li>
             <span>
-              <i className="fas fa-envelope"></i> { props.contact.email }
+              <i className="fas fa-envelope"></i> { header.contact.email }
             </span>
           </li>
           <li>
             <span>
-              <i className="fab fa-linkedin"></i> { props.contact.linkedin }
+              <i className="fab fa-linkedin"></i> { header.contact.linkedin }
             </span>
           </li>
           <li>
             <span>
-              <i className="fab fa-github"></i> { props.contact.github }
+              <i className="fab fa-github"></i> { header.contact.github }
             </span>
           </li>
           <li>
             <span>
-              <i className="fab fa-stack-overflow"></i> { props.contact.stackoverflow }
+              <i className="fab fa-stack-overflow"></i> { header.contact.stackoverflow }
             </span>
           </li>
         </ul>
@@ -48,4 +49,10 @@ const Header = (props) => {
   );
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    header: state.header
+  }
+}
+
+export default connect(mapStateToProps, null)(Header);
